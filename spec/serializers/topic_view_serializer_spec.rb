@@ -258,6 +258,16 @@ describe TopicViewSerializer do
       expect(details[:allowed_groups].find { |ag| ag[:id] == group.id }).to be_present
     end
 
+    it "has can_publish_page if possible" do
+      SiteSetting.enable_page_publishing = true
+
+      json = serialize_topic(topic, user)
+      expect(json[:details][:can_publish_page]).to be_blank
+
+      json = serialize_topic(topic, admin)
+      expect(json[:details][:can_publish_page]).to eq(true)
+    end
+
     context "can_edit_tags" do
       before do
         SiteSetting.tagging_enabled = true

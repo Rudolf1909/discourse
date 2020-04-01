@@ -71,7 +71,7 @@ class TopicViewSerializer < ApplicationSerializer
     :pm_with_non_human_user,
     :queued_posts_count,
     :show_read_indicator,
-    :requested_group_name
+    :requested_group_name,
   )
 
   has_one :details, serializer: TopicViewDetailsSerializer, root: false, embed: :objects
